@@ -59,7 +59,7 @@ const moviesController = {
     },
     create: async (req, res) => {
         try{
-        await db.Movie.create({
+        const movie = await db.Movie.create({
             title: req.body.title,
             rating: req.body.rating,
             awards: req.body.awards,
@@ -67,6 +67,9 @@ const moviesController = {
             length: req.body.length,
             genre_id: req.body.genero
         })
+
+        movie.addActor([1,2,3])
+
         res.redirect('/movies')
         } catch (error) {
             console.log(error)
@@ -92,7 +95,8 @@ const moviesController = {
                 rating: req.body.rating,
                 awards: req.body.awards,
                 release_date: req.body.release_date,
-                length: req.body.length
+                length: req.body.length,
+                genre_id: req.body.genero
             },{
                 where: {
                     id: req.params.id

@@ -39,6 +39,10 @@ module.exports = (sequelize, dataTypes) => {
             otherKey: 'movie_id',
             timestamps: false   
         })
+        Actor.hasMany(models.ActorMovie,{
+            foreignKey: 'actor_id',
+            onDelete: 'CASCADE'
+        })
     }
     return Actor
 };
